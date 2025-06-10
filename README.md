@@ -156,7 +156,7 @@ module "rds_mysql" {
 | storage_type                        | One of standard (magnetic), gp2 (general purpose SSD), or io1 (provisioned IOPS SSD).                                 | `string`       | `"gp2"`                    |    no    |
 | tags                                | A mapping of tags to assign to all resources.                                                                         | `map(string)`  | `{}`                       |    no    |
 | time_zone                           | The database time zone.                                                                                               | `string`       | `"UTC"`                    |    no    |
-| tx_isolation                        | Sets the default transaction isolation level.                                                                         | `string`       | `"REPEATABLE-READ"`        |    no    |
+| transaction_isolation                        | Sets the default transaction isolation level.                                                                         | `string`       | `"REPEATABLE-READ"`        |    no    |
 
 ## Outputs
 

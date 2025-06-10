@@ -222,7 +222,7 @@ variable "time_zone" {
   description = "The database time zone."
 }
 
-variable "tx_isolation" {
+variable "transaction_isolation" {
   default     = "REPEATABLE-READ"
   type        = string
   description = "Sets the default transaction isolation level."
@@ -233,3 +233,10 @@ variable "ca_cert_identifier" {
   type        = string
   description = "The identifier of the CA certificate for the DB instance."
 }
+
+variable "aws_region" {
+  description = "AWS region to deploy into"
+  type        = string
+  default     = "us-east-1"
+}
+

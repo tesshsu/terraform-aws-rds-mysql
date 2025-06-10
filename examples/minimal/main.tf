@@ -1,11 +1,11 @@
 module "rds_mysql" {
   source            = "../../"
-  identifier        = "example"
-  engine_version    = "5.7.28"
-  instance_class    = "db.t2.small"
-  allocated_storage = 20
-  username          = "root"
-  password          = "YouShouldChangePasswordAfterApply!"
+  identifier        = "prod-db"
+  engine_version    = "8.0.35"
+  instance_class    = "db.t4g.medium"
+  allocated_storage = 50
+  username            = "admin"
+  password            = "StrongPssw0rd!"
 
   subnet_ids         = module.vpc.public_subnet_ids
   vpc_id             = module.vpc.vpc_id
