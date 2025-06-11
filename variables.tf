@@ -229,7 +229,7 @@ variable "transaction_isolation" {
 }
 
 variable "ca_cert_identifier" {
-  default     = "rds-ca-2019"
+  default     = "rds-ca-rsa2048-g1"
   type        = string
   description = "The identifier of the CA certificate for the DB instance."
 }
