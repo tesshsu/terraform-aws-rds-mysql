@@ -113,7 +113,8 @@ resource "aws_db_instance" "default" {
   # - Can't be a word reserved by the specified database engine
   #
   # https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html#RDS_Limits.Constraints
-  db_name = var.name
+  name = var.name
+  db_name = var.db_name
 
   # The following list briefly describes the three storage types:
   #
