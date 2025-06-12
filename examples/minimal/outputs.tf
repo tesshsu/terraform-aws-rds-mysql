@@ -150,7 +150,7 @@ output "ec2_ssh_command" {
 
 output "rds_endpoint" {
   description = "RDS MySQL endpoint"
-  value       = module.rds_mysql.this_db_instance_endpoint
+  value       = module.rds_mysql.db_instance_endpoint
 }
 
 output "todo_app_url" {
