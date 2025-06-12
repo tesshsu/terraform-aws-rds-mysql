@@ -31,3 +31,14 @@ variable "password" {
   type        = string
   description = "Master password for the DB instance"
 }
+
+variable "ec2_instance_type" {
+  type        = string
+  description = "EC2 instance type"
+  default     = "t2.micro"
+}
+
+variable "key_pair_name" {
+  type        = string
+  description = "AWS key pair name for SSH access"
+}

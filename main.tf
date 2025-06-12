@@ -362,3 +362,75 @@ resource "aws_security_group_rule" "egress" {
   cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = aws_security_group.default.id
 }
+
+# Add EC2 instance
+resource "aws_instance" "app_server" {
+  ami                    = data.aws_ami.amazon_linux.id
+  instance_type          = var.ec2_instance_type
+  key_name              = var.key_pair_name
+  subnet_id             = module.vpc.public_subnet_ids[0]
+  vpc_security_group_ids = [aws_security_group.ec2.id]
+  
+  user_data = base64encode(templatefile("${path.module}/user_data.sh", {
+    rds_endpoint = module.rds_mysql.this_db_instance_endpoint
+    db_username  = var.username
+    db_password  = var.password
+  }))
+  
+  tags = {
+    Name = "${var.identifier}-app-server"
+  }
+}
+
+# Security group for EC2
+resource "aws_security_group" "ec2" {
+  name_prefix = "${var.identifier}-ec2-"
+  vpc_id      = module.vpc.vpc_id
+  
+  # SSH access
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]  # Restrict this in production
+  }
+  
+  # HTTP access for web app
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  
+  # HTTPS access
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  
+  # Outbound internet access
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  
+  tags = {
+    Name = "${var.identifier}-ec2-sg"
+  }
+}
+
+# Data source for latest Amazon Linux AMI
+data "aws_ami" "amazon_linux" {
+  most_recent = true
+  owners      = ["amazon"]
+  
+  filter {
+    name   = "name"
+    values = ["amzn2-ami-hvm-*-x86_64-gp2"]
+  }
+}
