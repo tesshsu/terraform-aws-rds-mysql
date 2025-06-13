@@ -16,3 +16,4 @@
 
 # Auto include makefiles
 .Makefile.terraform
+*.hcl

@@ -137,3 +137,24 @@ output "security_group_ingress" {
 output "security_group_egress" {
   value = module.rds_mysql.security_group_egress
 }
+
+output "ec2_public_ip" {
+  description = "Public IP of EC2 instance"
+  value       = aws_instance.app_server.public_ip
+}
+
+output "ec2_ssh_command" {
+  description = "SSH command to connect to EC2"
+  value       = "ssh -i ${var.key_pair_name}.pem ec2-user@${aws_instance.app_server.public_ip}"
+}
+
+output "rds_endpoint" {
+  description = "RDS MySQL endpoint"
+  value       = module.rds_mysql.db_instance_endpoint
+}
+
+output "todo_app_url" {
+  description = "URL for todo application"
+  value       = "http://${aws_instance.app_server.public_ip}"
+}
+

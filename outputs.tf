@@ -74,7 +74,7 @@ output "db_instance_multi_az" {
 }
 
 output "db_instance_name" {
-  value       = aws_db_instance.default.name
+  value       = aws_db_instance.default.db_name
   description = "The database name."
 }
 
