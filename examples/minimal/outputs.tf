@@ -1,141 +1,38 @@
-output "db_instance_address" {
-  value = module.rds_mysql.db_instance_address
+output "cluster_endpoint" {
+  description = "Aurora cluster endpoint"
+  value       = module.aurora_mysql.cluster_endpoint
 }
 
-output "db_instance_arn" {
-  value = module.rds_mysql.db_instance_arn
+output "cluster_arn" {
+  value = module.aurora_mysql.cluster_arn
 }
 
-output "db_instance_allocated_storage" {
-  value = module.rds_mysql.db_instance_allocated_storage
+output "cluster_database_name" {
+  value = module.aurora_mysql.cluster_database_name
 }
 
-output "db_instance_availability_zone" {
-  value = module.rds_mysql.db_instance_availability_zone
+output "cluster_engine" {
+  value = module.aurora_mysql.cluster_engine
 }
 
-output "db_instance_backup_retention_period" {
-  value = module.rds_mysql.db_instance_backup_retention_period
+output "cluster_engine_version" {
+  value = module.aurora_mysql.cluster_engine_version
 }
 
-output "db_instance_backup_window" {
-  value = module.rds_mysql.db_instance_backup_window
+output "cluster_id" {
+  value = module.aurora_mysql.cluster_id
 }
 
-output "db_instance_ca_cert_identifier" {
-  value = module.rds_mysql.db_instance_ca_cert_identifier
-}
-
-output "db_instance_endpoint" {
-  value = module.rds_mysql.db_instance_endpoint
-}
-
-output "db_instance_engine" {
-  value = module.rds_mysql.db_instance_engine
-}
-
-output "db_instance_engine_version" {
-  value = module.rds_mysql.db_instance_engine_version
-}
-
-output "db_instance_hosted_zone_id" {
-  value = module.rds_mysql.db_instance_hosted_zone_id
-}
-
-output "db_instance_id" {
-  value = module.rds_mysql.db_instance_id
-}
-
-output "db_instance_class" {
-  value = module.rds_mysql.db_instance_class
-}
-
-output "db_instance_maintenance_window" {
-  value = module.rds_mysql.db_instance_maintenance_window
-}
-
-output "db_instance_multi_az" {
-  value = module.rds_mysql.db_instance_multi_az
-}
-
-output "db_instance_name" {
-  value = module.rds_mysql.db_instance_name
-}
-
-output "db_instance_port" {
-  value = module.rds_mysql.db_instance_port
-}
-
-output "db_instance_resource_id" {
-  value = module.rds_mysql.db_instance_resource_id
-}
-
-output "db_instance_status" {
-  value = module.rds_mysql.db_instance_status
-}
-
-output "db_instance_storage_encrypted" {
-  value = module.rds_mysql.db_instance_storage_encrypted
-}
-
-output "db_instance_username" {
-  value = module.rds_mysql.db_instance_username
-}
-
-output "db_option_group_id" {
-  value = module.rds_mysql.db_option_group_id
-}
-
-output "db_option_group_arn" {
-  value = module.rds_mysql.db_option_group_arn
-}
-
-output "db_parameter_group_id" {
-  value = module.rds_mysql.db_parameter_group_id
-}
-
-output "db_parameter_group_arn" {
-  value = module.rds_mysql.db_parameter_group_arn
-}
-
-output "db_subnet_group_id" {
-  value = module.rds_mysql.db_subnet_group_id
-}
-
-output "db_subnet_group_arn" {
-  value = module.rds_mysql.db_subnet_group_arn
+output "cluster_status" {
+  value = module.aurora_mysql.cluster_status
 }
 
 output "security_group_id" {
-  value = module.rds_mysql.security_group_id
+  value = module.aurora_mysql.security_group_id
 }
 
 output "security_group_arn" {
-  value = module.rds_mysql.security_group_arn
-}
-
-output "security_group_vpc_id" {
-  value = module.rds_mysql.security_group_vpc_id
-}
-
-output "security_group_owner_id" {
-  value = module.rds_mysql.security_group_owner_id
-}
-
-output "security_group_name" {
-  value = module.rds_mysql.security_group_name
-}
-
-output "security_group_description" {
-  value = module.rds_mysql.security_group_description
-}
-
-output "security_group_ingress" {
-  value = module.rds_mysql.security_group_ingress
-}
-
-output "security_group_egress" {
-  value = module.rds_mysql.security_group_egress
+  value = module.aurora_mysql.security_group_arn
 }
 
 output "ec2_public_ip" {
@@ -148,13 +45,12 @@ output "ec2_ssh_command" {
   value       = "ssh -i ${var.key_pair_name}.pem ec2-user@${aws_instance.app_server.public_ip}"
 }
 
-output "rds_endpoint" {
-  description = "RDS MySQL endpoint"
-  value       = module.rds_mysql.db_instance_endpoint
+output "aurora_endpoint" {
+  description = "Aurora MySQL endpoint"
+  value       = module.aurora_mysql.cluster_endpoint
 }
 
 output "todo_app_url" {
   description = "URL for todo application"
   value       = "http://${aws_instance.app_server.public_ip}"
 }
-
