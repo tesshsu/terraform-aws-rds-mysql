@@ -6,7 +6,7 @@ variable "identifier" {
 variable "engine_version" {
   type        = string
   description = "MySQL engine version"
-  default     = "8.0.35"
+  default     = "8.0.40"
 }
 
 variable "instance_class" {
@@ -25,11 +25,6 @@ variable "username" {
   type        = string
   description = "Master username for the DB instance"
   default     = "admin"
-}
-
-variable "password" {
-  type        = string
-  description = "Master password for the DB instance"
 }
 
 variable "ec2_instance_type" {

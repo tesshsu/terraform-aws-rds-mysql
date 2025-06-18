@@ -1,0 +1,40 @@
+.
+├── .github
+│   └── workflows
+│       ├── json.yml
+│       ├── markdown.yml
+│       ├── terraform.yml
+│       └── yaml.yml
+├── .gitignore
+├── .Makefile.terraform
+├── .markdownlint.json
+├── .prettierignore
+├── .yamllint
+├── examples
+│   ├── complete
+│   │   ├── main.tf
+│   │   ├── outputs.tf
+│   │   └── providers.tf
+│   └── minimal
+│       ├── .terraform.lock.hcl
+│       ├── main.tf
+│       ├── outputs.tf
+│       ├── providers.tf
+│       ├── terraform.tfstate
+│       ├── terraform.tfstate.backup
+│       ├── terraform.tfvars
+│       ├── user_data.sh
+│       └── variables.tf
+├── LICENSE
+├── main.tf
+├── Makefile
+├── modules
+│   └── .gitkeep
+├── outputs.tf
+├── README.md
+├── structure.txt
+├── variables.tf
+├── VERSION
+└── versions.tf
+
+7 directories, 31 files
