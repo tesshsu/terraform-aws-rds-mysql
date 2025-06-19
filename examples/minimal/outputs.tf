@@ -79,7 +79,8 @@ output "db_instance_storage_encrypted" {
 }
 
 output "db_instance_username" {
-  value = module.rds_mysql.db_instance_username
+  value     = module.rds_mysql.db_instance_username
+  sensitive = true
 }
 
 output "db_option_group_id" {

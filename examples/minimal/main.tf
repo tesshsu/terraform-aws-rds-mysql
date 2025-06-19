@@ -1,15 +1,19 @@
 module "rds_mysql" {
-  source            = "../../"
-  identifier        = "prod-db"
-  name              = "prodDb"
-  engine_version    = "8.0.35"
-  instance_class    = "db.t4g.micro"
-  allocated_storage = 50
-  username            = "admin"
-  password            = "StrongPssw0rd!"
+  source             = "../../"
+  identifier         = "prod-db"
+  name               = "prodDb"
+  engine_version     = "8.0.40"
+  instance_class     = "db.t4g.micro"
+  allocated_storage  = 50
+  username           = local.creds.username
+  password           = local.creds.password
   subnet_ids         = module.vpc.public_subnet_ids
   vpc_id             = module.vpc.vpc_id
   source_cidr_blocks = [module.vpc.vpc_cidr_block]
+}
+
+data "aws_secretsmanager_secret_version" "db" {
+  secret_id = "prod-db-credentials"
 }
 
 resource "aws_instance" "app_server" {
@@ -21,8 +25,8 @@ resource "aws_instance" "app_server" {
 
   user_data = base64encode(templatefile("${path.module}/user_data.sh", {
     rds_endpoint = module.rds_mysql.db_instance_endpoint,
-    db_username  = var.username,
-    db_password  = var.password
+    db_username  = local.creds.username,
+    db_password  = local.creds.password
   }))
 
   tags = {
@@ -41,7 +45,7 @@ resource "aws_security_group" "ec2" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"] # Restrict this in production
   }
-  
+
   ingress {
     from_port   = 80
     to_port     = 80
@@ -78,6 +82,8 @@ module "vpc" {
 
 locals {
   cidr_block = "10.255.0.0/16"
+  # Convert the JSON string returned by Secrets Manager into a Terraform map
+  creds = jsondecode(data.aws_secretsmanager_secret_version.db.secret_string)
 }
 
 data "aws_availability_zones" "available" {}
