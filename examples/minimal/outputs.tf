@@ -159,3 +159,9 @@ output "todo_app_url" {
   value       = "http://${aws_instance.app_server.public_ip}"
 }
 
+output "elastic_ip_address" {
+  description = "The public IP address of the EC2 instance"
+  value       = aws_eip.todo_app.public_ip
+}
+
+
